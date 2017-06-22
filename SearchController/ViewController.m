@@ -33,6 +33,9 @@
     self.tableView.tableHeaderView = self.searchController.searchBar;
     [self.view addSubview:self.tableView];
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([TableViewCell class])];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitle:@"取消"];
+    //设置definesPresentationContext为true，可以保证在UISearchController在激活状态下用户push到下一个view controller之后search bar不会仍留在界面上。
+    self.definesPresentationContext = YES;
 }
 
 #pragma mark - lazyload
@@ -127,11 +130,11 @@
 #pragma mark - UISearchResultsUpdating
 //当用户输入完成后点击确定会执行该代理方法，用户删除操作会执行该操作
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
-    UIButton *cancelButton = [searchController.searchBar valueForKey:@"cancelButton"];
-    if (cancelButton) {
-        [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-        [cancelButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    }
+//    UIButton *cancelButton = [searchController.searchBar valueForKey:@"cancelButton"];
+//    if (cancelButton) {
+//        [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+//        [cancelButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+//    }
     
     
     NSString * searchString = searchController.searchBar.text;
